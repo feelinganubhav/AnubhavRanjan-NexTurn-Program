@@ -6,6 +6,7 @@ import (
 	"go-blog-management-system/service"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 type BlogController struct {
@@ -42,8 +43,7 @@ func (controller *BlogController) CreateBlog(w http.ResponseWriter, r *http.Requ
 
 // Get a blog by ID
 func (controller *BlogController) GetBlog(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	idStr := query.Get("id")
+	idStr := strings.TrimPrefix(r.URL.Path, "/blogs/")
 	blogID, err := strconv.Atoi(idStr)
 	if err != nil {
 		writeJSONResponse(w, http.StatusBadRequest, map[string]string{"error": "Invalid blog ID"})
@@ -62,13 +62,19 @@ func (controller *BlogController) GetBlog(w http.ResponseWriter, r *http.Request
 // Get all blogs with pagination
 func (controller *BlogController) GetAllBlogs(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	page, _ := strconv.Atoi(query.Get("page"))
-	limit, _ := strconv.Atoi(query.Get("limit"))
-
-	if page <= 0 || limit <= 0 {
-		writeJSONResponse(w, http.StatusBadRequest, map[string]string{"error": "Page and limit must be positive integers"})
-		return
+	page, err := strconv.Atoi(query.Get("page"))
+	if err != nil || page <= 0 {
+		page = 1
 	}
+	limit, err := strconv.Atoi(query.Get("limit"))
+	if err != nil || page <= 0 {
+		limit = 10
+	}
+
+	// if page <= 0 || limit <= 0 {
+	// 	writeJSONResponse(w, http.StatusBadRequest, map[string]string{"error": "Page and limit must be positive integers"})
+	// 	return
+	// }
 
 	blogs, err := controller.BlogService.GetAllBlogs(page, limit)
 	if err != nil {
@@ -81,8 +87,7 @@ func (controller *BlogController) GetAllBlogs(w http.ResponseWriter, r *http.Req
 
 // Update a blog
 func (controller *BlogController) UpdateBlog(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	idStr := query.Get("id")
+	idStr := strings.TrimPrefix(r.URL.Path, "/blogs/")
 	blogID, err := strconv.Atoi(idStr)
 	if err != nil {
 		writeJSONResponse(w, http.StatusBadRequest, map[string]string{"error": "Invalid blog ID"})
@@ -107,8 +112,7 @@ func (controller *BlogController) UpdateBlog(w http.ResponseWriter, r *http.Requ
 
 // Delete a blog
 func (controller *BlogController) DeleteBlog(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	idStr := query.Get("id")
+	idStr := strings.TrimPrefix(r.URL.Path, "/blogs/")
 	blogID, err := strconv.Atoi(idStr)
 	if err != nil {
 		writeJSONResponse(w, http.StatusBadRequest, map[string]string{"error": "Invalid blog ID"})

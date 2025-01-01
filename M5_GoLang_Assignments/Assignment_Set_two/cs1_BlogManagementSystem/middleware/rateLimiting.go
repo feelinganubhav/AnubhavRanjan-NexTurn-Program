@@ -50,14 +50,12 @@ func min(a, b int) int {
 }
 
 // RateLimitingMiddleware applies the rate limiter to incoming requests
-func RateLimitingMiddleware(rl *RateLimiter) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if !rl.Allow() {
-				http.Error(w, "Too many requests", http.StatusTooManyRequests)
-				return
-			}
-			next.ServeHTTP(w, r)
-		})
-	}
+func RateLimitingMiddleware(rl *RateLimiter, next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !rl.Allow() {
+			http.Error(w, "Too many requests", http.StatusTooManyRequests)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }

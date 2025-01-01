@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	db "go-blog-management-system/config"
 	"go-blog-management-system/controller"
@@ -8,8 +9,7 @@ import (
 	"go-blog-management-system/repository"
 	"go-blog-management-system/service"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"time"
 )
 
 func main() {
@@ -24,33 +24,93 @@ func main() {
 	userService := service.NewUserService(userRepo)
 	userController := controller.NewUserController(userService)
 
-	// Routes
-	http.HandleFunc("/register", middleware.loggingMiddleware(middleware.InputValidationMiddleware([]string{"name", "email", "password"}, blogController.RegisterUser)))
-	http.HandleFunc("/login", middleware.loggingMiddleware(middleware.InputValidationMiddleware([]string{"email", "password"}, blogController.AuthenticateUser)))
+	// Routes:-
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			w.Header().Set("Content-Type", "application/json")
+			response := map[string]string{
+				"App":     "Welcome to the Blog Management System!",
+				"message": "Please Register & Login to Explore blogs or to contribute.",
+			}
+			json.NewEncoder(w).Encode(response)
+		} else {
+			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		}
+	})
+
+	// Register Route
+	http.Handle("/register", middleware.InputValidationMiddleware([]string{"name", "email", "password"})(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+			return
+		}
+		userController.RegisterUser(w, r)
+	})))
+
+	// Login Route
+	http.Handle("/login", middleware.InputValidationMiddleware([]string{"email", "password"})(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+			return
+		}
+		userController.AuthenticateUser(w, r)
+	})))
 
 	// Protected routes
-	authorized := r.Group("/")
-	authorized.Use(middleware.AuthMiddleware())
-	{
-		authorized.GET("/", func(c *gin.Context) {
-			userID := c.GetString("userID")
-			c.JSON(http.StatusOK, gin.H{"App": "Welcome to The E-Commerce App!!", "message": "You have accessed a protected route!", "userID": userID})
-		})
+	http.Handle("/home", middleware.AuthMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		userID, _ := middleware.GetUserIDFromContext(r)
+		response := map[string]string{
+			"App":     "Welcome to the Blog Management System!!",
+			"message": "You have accessed a protected route!",
+			"userID":  userID,
+		}
+		json.NewEncoder(w).Encode(response)
+	})))
 
-		// Routes
-		authorized.POST("/products", middleware.InputValidationMiddleware([]string{"name", "description", "price", "stock", "category_id"}), productController.CreateProduct)
-		authorized.GET("/products/:id", productController.GetProduct)
-		authorized.GET("/products", productController.GetAllProducts)
-		authorized.PUT("/products/:id", middleware.InputValidationMiddleware([]string{"name", "description", "price", "stock", "category_id"}), productController.UpdateProduct)
-		authorized.DELETE("/products/:id", productController.DeleteProduct)
+	// AuthMiddleware wraps the handler for authentication
+	http.Handle("/blogs", middleware.AuthMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			// Input validation for POST
+			middleware.InputValidationMiddleware([]string{"title", "content", "author"})(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				blogController.CreateBlog(w, r)
+			})).ServeHTTP(w, r)
+		case http.MethodGet:
+			blogController.GetAllBlogs(w, r)
+		default:
+			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		}
+	})))
 
-	}
+	// AuthMiddleware wraps the handler for authentication with ID-based operations
+	http.Handle("/blogs/", middleware.AuthMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			blogController.GetBlog(w, r)
+		case http.MethodPut:
+			// Input validation for PUT
+			middleware.InputValidationMiddleware([]string{"title", "content", "author"})(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				blogController.UpdateBlog(w, r)
+			})).ServeHTTP(w, r)
+		case http.MethodDelete:
+			blogController.DeleteBlog(w, r)
+		default:
+			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		}
+	})))
 
-	loggedRoutes := middleware.LoggingMiddleware(http.DefaultServeMux)
+	// Rate limiter setup
+	rateLimiter := middleware.NewRateLimiter(10, time.Second)
+
+	// loggedRoutes := middleware.LoggingMiddleware(http.DefaultServeMux)
+	// Wrap DefaultServeMux with logging and rate limiting middleware
+	loggedAndRateLimitedMux := middleware.LoggingMiddleware(
+		middleware.RateLimitingMiddleware(rateLimiter, http.DefaultServeMux),
+	)
 
 	// Start the server
 	fmt.Println("Server is running on port 8081")
-	if err := http.ListenAndServe(":8081", loggedRoutes); err != nil {
+	if err := http.ListenAndServe(":8081", loggedAndRateLimitedMux); err != nil {
 		fmt.Println("Error Starting Server:", err)
 	}
 }
