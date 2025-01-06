@@ -1,0 +1,184 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 100vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .container {
+    background: #1e1e1e;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode table {
+    color: white;
+    --bs-table-striped-color: inherit;   
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.expense-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.expense-form input,
+.expense-form select,
+.expense-form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.expense-form input:hover,
+.expense-form select:hover,
+.expense-form button:hover {
+    border-color: #4CAF50;
+}
+
+.expense-form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.expense-form button:hover {
+    background-color: #45a049;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 20px; */
+    margin: 0;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    visibility: visible !important;
+    display: table-header-group !important;
+    background-color: #4CAF50; /* Default Bootstrap header background */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.category-badge {
+    padding: 0.25em 0.5em;
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 0.85rem;
+}
+
+/* .category-food { background-color: #f57c00; }
+.category-travel { background-color: #0288d1; }
+.category-shopping { background-color: #7b1fa2; } */
+
+/* Summary Section */
+.summary {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f5e9;
+    border-radius: 10px;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.dark-mode-toggle button {
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode-toggle button:hover {
+    background: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .expense-form {
+        flex-direction: column;
+    }
+
+    .expense-form input,
+    .expense-form select,
+    .expense-form button {
+        width: 100%;
+    }
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#chartToggle {
+    cursor: pointer;
+}
+
+canvas {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
