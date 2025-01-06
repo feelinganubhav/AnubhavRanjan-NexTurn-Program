@@ -1,0 +1,22 @@
+[
+    {
+        "customer_id": 1,
+        "name": "Aryan Sharma",
+        "email": "aryan.sharma@gmail.com",
+        "phone": "9876543210",
+        "book_title": "To Kill a Mockingbird",
+        "quantity_sold": 5,
+        "total_price": 1750,
+        "transaction_date": "2025-01-06T14:04:35.421155"
+    },
+    {
+        "customer_id": 9,
+        "name": "Anubhav Ranjan",
+        "email": "anubhav@gmail.com",
+        "phone": "9549399024",
+        "book_title": "Rich Dad Poor Dad",
+        "quantity_sold": 7,
+        "total_price": 2800.0,
+        "transaction_date": "2025-01-06T14:42:24.667264"
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "customer_id": 1,
+        "name": "Aryan Sharma",
+        "email": "aryan.sharma@gmail.com",
+        "phone": "9876543210"
+    },
+    {
+        "customer_id": 2,
+        "name": "Neha Verma",
+        "email": "neha.verma@gmail.com",
+        "phone": "9876543211"
+    },
+    {
+        "customer_id": 3,
+        "name": "Rajesh Kumar",
+        "email": "rajesh.kumar@gmail.com",
+        "phone": "9876543212"
+    },
+    {
+        "customer_id": 4,
+        "name": "Priya Singh",
+        "email": "priya.singh@gmail.com",
+        "phone": "9876543213"
+    },
+    {
+        "customer_id": 5,
+        "name": "Karan Mehta",
+        "email": "karan.mehta@gmail.com",
+        "phone": "9876543214"
+    },
+    {
+        "customer_id": 6,
+        "name": "Anjali Patel",
+        "email": "anjali.patel@gmail.com",
+        "phone": "9876543215"
+    },
+    {
+        "customer_id": 7,
+        "name": "Rohit Choudhary",
+        "email": "rohit.choudhary@gmail.com",
+        "phone": "9876543216"
+    },
+    {
+        "customer_id": 8,
+        "name": "Sakshi Gupta",
+        "email": "sakshi.gupta@gmail.com",
+        "phone": "9876543217"
+    },
+    {
+        "customer_id": 9,
+        "name": "Anubhav Ranjan",
+        "email": "anubhav@gmail.com",
+        "phone": "9549399024"
+    }
+]
+
+
