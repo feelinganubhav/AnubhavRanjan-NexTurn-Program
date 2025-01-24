@@ -1,0 +1,14 @@
+Started by user Anubhav Ranjan
+Running as SYSTEM
+Building in workspace D:\jenkins_New_Home\workspace\File_Transfer_Automation
+[File_Transfer_Automation] $ cmd /c call "C:\Program Files\Apache Software Foundation\Tomcat 11.0\temp\jenkins7695419329763902533.bat"
+
+D:\jenkins_New_Home\workspace\File_Transfer_Automation>xcopy C:\Jenkins\src C:\Jenkins\dest /E /I /H /Y 
+C:\Jenkins\src\ReadMe.txt
+1 File(s) copied
+
+D:\jenkins_New_Home\workspace\File_Transfer_Automation>echo File transfer completed successfully! 
+File transfer completed successfully!
+
+D:\jenkins_New_Home\workspace\File_Transfer_Automation>exit 0 
+Finished: SUCCESS
