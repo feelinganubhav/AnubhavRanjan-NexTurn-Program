@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 131.0.0.0 (Windows 10)" package="" timestamp="2025-01-24T08:37:07" id="0" hostname="LAPTOP-LVM9RQE9" tests="38" errors="0" failures="0" time="0.132">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"/>
+  </properties>
+  <testcase name="Mocking: Notification Service should return &quot;Notification Sent&quot; when notification is successfully sent" time="0.005" classname="Mocking: Notification Service"/>
+  <testcase name="Mocking: Notification Service should not send notification if the message is empty" time="0" classname="Mocking: Notification Service"/>
+  <testcase name="Mocking: Notification Service should return &quot;Failed to Send&quot; when notification fails to send" time="0" classname="Mocking: Notification Service"/>
+  <testcase name="Mocking: Notification Service should handle a null notification service gracefully" time="0.001" classname="Mocking: Notification Service"/>
+  <testcase name="Spying: DOM Manipulation should toggle visibility twice correctly" time="0.003" classname="Spying: DOM Manipulation"/>
+  <testcase name="Spying: DOM Manipulation should show the element when it is initially hidden" time="0.001" classname="Spying: DOM Manipulation"/>
+  <testcase name="Spying: DOM Manipulation should hide the element when it is initially visible" time="0.001" classname="Spying: DOM Manipulation"/>
+  <testcase name="Spying: DOM Manipulation should track number of style changes" time="0.001" classname="Spying: DOM Manipulation"/>
+  <testcase name="Spying: DOM Manipulation should not throw an error if the element has no display style set" time="0.001" classname="Spying: DOM Manipulation"/>
+  <testcase name="Bonus Challenge: Integrate All Concepts should handle network timeout" time="0.111" classname="Bonus Challenge: Integrate All Concepts"/>
+  <testcase name="Bonus Challenge: Integrate All Concepts should display error message when fetch fails" time="0.001" classname="Bonus Challenge: Integrate All Concepts"/>
+  <testcase name="Bonus Challenge: Integrate All Concepts should handle multiple consecutive calls" time="0" classname="Bonus Challenge: Integrate All Concepts"/>
+  <testcase name="Bonus Challenge: Integrate All Concepts should display error message when user data is invalid" time="0.001" classname="Bonus Challenge: Integrate All Concepts"/>
+  <testcase name="Bonus Challenge: Integrate All Concepts should display user name when fetch is successful" time="0" classname="Bonus Challenge: Integrate All Concepts"/>
+  <testcase name="Addition function should add two numbers correctly" time="0" classname="Addition function"/>
+  <testcase name="Addition function should handle negative numbers" time="0" classname="Addition function"/>
+  <testcase name="String Utility Functions capitalize Function should not modify already capitalized words" time="0" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions capitalize Function should capitalize the first letter of a word" time="0" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions capitalize Function should handle single-character words" time="0" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions capitalize Function should return an empty string if input is empty" time="0" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions capitalize Function should handle null or undefined gracefully" time="0.001" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions capitalize Function should handle non-alphabetic characters at the start" time="0.001" classname="String Utility Functions capitalize Function"/>
+  <testcase name="String Utility Functions reverseString Function should return an empty string when input is empty" time="0" classname="String Utility Functions reverseString Function"/>
+  <testcase name="String Utility Functions reverseString Function should correctly reverse palindromes" time="0" classname="String Utility Functions reverseString Function"/>
+  <testcase name="String Utility Functions reverseString Function should handle single-character strings" time="0" classname="String Utility Functions reverseString Function"/>
+  <testcase name="String Utility Functions reverseString Function should handle strings with spaces and special characters" time="0.001" classname="String Utility Functions reverseString Function"/>
+  <testcase name="String Utility Functions reverseString Function should not throw errors for null or undefined inputs" time="0.001" classname="String Utility Functions reverseString Function"/>
+  <testcase name="String Utility Functions reverseString Function should reverse a given string" time="0" classname="String Utility Functions reverseString Function"/>
+  <testcase name="Array Index Error Handling should return the correct element for a valid index" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Array Index Error Handling should throw an error for non-integer indices" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Array Index Error Handling should throw an error if the array is empty" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Array Index Error Handling should throw an error if the index is NaN" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Array Index Error Handling should throw an error for a negative index" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Array Index Error Handling should throw an error for an index greater than or equal to the array length" time="0" classname="Array Index Error Handling"/>
+  <testcase name="Async Functions: Delayed Greeting should respect the specified delay" time="0.001" classname="Async Functions: Delayed Greeting"/>
+  <testcase name="Async Functions: Delayed Greeting should resolve with the correct greeting message" time="0" classname="Async Functions: Delayed Greeting"/>
+  <testcase name="Async Functions: Delayed Greeting should handle multiple concurrent delays correctly" time="0.001" classname="Async Functions: Delayed Greeting"/>
+  <testcase name="Async Functions: Delayed Greeting should handle zero delay" time="0" classname="Async Functions: Delayed Greeting"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
