@@ -1,0 +1,81 @@
+Started by user Anubhav Ranjan
+Running as SYSTEM
+Building in workspace D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --resolve-git-dir D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/feelinganubhav/React-ToDo-App.git # timeout=10
+Fetching upstream changes from https://github.com/feelinganubhav/React-ToDo-App.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.38.1.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/feelinganubhav/React-ToDo-App.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision f410e106c1ab7f219fbd0c70b9c812d9e0549c04 (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f f410e106c1ab7f219fbd0c70b9c812d9e0549c04 # timeout=10
+Commit message: "Adding My React-ToDo-App"
+ > git.exe rev-list --no-walk f410e106c1ab7f219fbd0c70b9c812d9e0549c04 # timeout=10
+[Build_and_Deploy_JS_Project] $ cmd /c call C:\Users\ANUBHA~1\AppData\Local\Temp\jenkins10806346563219259011.bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>echo Installing dependencies... 
+Installing dependencies...
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>npm install 
+
+up to date, audited 363 packages in 5s
+
+125 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (3 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[Build_and_Deploy_JS_Project] $ cmd /c call C:\Users\ANUBHA~1\AppData\Local\Temp\jenkins5840406530483943286.bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>echo Building the project... 
+Building the project...
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>npm run build 
+
+> 09todo@0.0.0 build
+> vite build
+
+[36mvite v5.3.4 [32mbuilding for production...[36m[39m
+transforming...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[32m✓[39m 36 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  0.47 kB[22m[1m[22m[2m │ gzip:  0.30 kB[22m
+[2mdist/[22m[35massets/index-qX10TC9a.css  [39m[1m[2m  7.95 kB[22m[1m[22m[2m │ gzip:  2.28 kB[22m
+[2mdist/[22m[36massets/index-BehmD-c_.js   [39m[1m[2m146.16 kB[22m[1m[22m[2m │ gzip: 47.08 kB[22m
+[32m✓ built in 1.86s[39m
+[Build_and_Deploy_JS_Project] $ cmd /c call C:\Users\ANUBHA~1\AppData\Local\Temp\jenkins11686296670645456913.bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>echo Deploying the build... 
+Deploying the build...
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>xcopy "D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\dist" "D:\React-ToDo-App-Deployment" /E /I /H /Y 
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\dist\index.html
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\dist\vite.svg
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\dist\assets\index-BehmD-c_.js
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project\dist\assets\index-qX10TC9a.css
+4 File(s) copied
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>if 0 NEQ 0 (
+echo ERROR: Deployment failed!  
+ exit 1 
+) 
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>echo Deployment completed successfully! 
+Deployment completed successfully!
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_JS_Project>exit 0 
+Archiving artifacts
+Finished: SUCCESS
