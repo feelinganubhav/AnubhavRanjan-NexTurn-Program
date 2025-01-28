@@ -1,0 +1,228 @@
+Started by user Anubhav Ranjan
+Obtained Jenkinsfile from git https://github.com/feelinganubhav/React-ToDo-App.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --resolve-git-dir D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/feelinganubhav/React-ToDo-App.git # timeout=10
+Fetching upstream changes from https://github.com/feelinganubhav/React-ToDo-App.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.38.1.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/feelinganubhav/React-ToDo-App.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision dd53a64de093ade3672ebe3175888851664e6e3d (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f dd53a64de093ade3672ebe3175888851664e6e3d # timeout=10
+Commit message: "Updating the Jenkinsfile"
+ > git.exe rev-list --no-walk 0173082ceb5e5dcc3edd9541305a7f9f151549ee # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone Repository)
+[Pipeline] echo
+Cloning the React ToDo Application repository...
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --resolve-git-dir D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/feelinganubhav/React-ToDo-App.git # timeout=10
+Fetching upstream changes from https://github.com/feelinganubhav/React-ToDo-App.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.38.1.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/feelinganubhav/React-ToDo-App.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision dd53a64de093ade3672ebe3175888851664e6e3d (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f dd53a64de093ade3672ebe3175888851664e6e3d # timeout=10
+ > git.exe branch -a -v --no-abbrev # timeout=10
+ > git.exe branch -D main # timeout=10
+ > git.exe checkout -b main dd53a64de093ade3672ebe3175888851664e6e3d # timeout=10
+Commit message: "Updating the Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Install Dependencies)
+[Pipeline] echo
+Installing dependencies...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>npm install 
+
+up to date, audited 865 packages in 3s
+
+146 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (3 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Lint Code)
+[Pipeline] echo
+Linting the code using ESLint...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>npx eslint .   || exit /B 0 
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\src\App.test.js
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\src\Components\__tests__\Todoform.test.js
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\src\Components\__tests__\Todoitem.test.js
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project\src\Context\Todocontext.js
+  23:15  warning  'message' is defined but never used     no-unused-vars
+  24:18  warning  'id' is defined but never used          no-unused-vars
+  24:22  warning  'message' is defined but never used     no-unused-vars
+  25:18  warning  'id' is defined but never used          no-unused-vars
+  26:22  warning  'id' is defined but never used          no-unused-vars
+  27:18  warning  'id' is defined but never used          no-unused-vars
+  27:22  warning  'targetdate' is defined but never used  no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Run Tests)
+[Pipeline] echo
+Running tests On All React ToDo App Fuctionalities using Jest...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>npm test   || exit /B 0 
+
+> 09todo@0.0.0 test
+> jest
+
+PASS src/Components/__tests__/Todoform.test.js
+PASS src/Components/__tests__/Todoitem.test.js
+PASS src/App.test.js
+
+Test Suites: 3 passed, 3 total
+Tests:       10 passed, 10 total
+Snapshots:   0 total
+Time:        3.258 s
+Ran all test suites.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Application)
+[Pipeline] echo
+Building the React ToDo Application...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>npm run build 
+
+> 09todo@0.0.0 build
+> vite build
+
+[36mvite v5.3.4 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 36 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  0.47 kB[22m[1m[22m[2m │ gzip:  0.30 kB[22m
+[2mdist/[22m[35massets/index-qX10TC9a.css  [39m[1m[2m  7.95 kB[22m[1m[22m[2m │ gzip:  2.28 kB[22m
+[2mdist/[22m[36massets/index-BehmD-c_.js   [39m[1m[2m146.16 kB[22m[1m[22m[2m │ gzip: 47.08 kB[22m
+[32m✓ built in 1.78s[39m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy Application)
+[Pipeline] echo
+Deploying the application...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>del /q D:\React-ToDo-App-CI-CD-Deployment\* 
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>xcopy dist D:\React-ToDo-App-CI-CD-Deployment /E /I /H /Y 
+dist\index.html
+dist\vite.svg
+dist\assets\index-BehmD-c_.js
+dist\assets\index-qX10TC9a.css
+4 File(s) copied
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Start Server for Testing)
+[Pipeline] echo
+Starting the Server...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>start /B npx serve -s D:\React-ToDo-App-CI-CD-Deployment -l 3000 
+[Pipeline] echo
+Waiting for a few seconds to allow the React app to start
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>powershell -Command 'Start-Sleep -Seconds 3' 
+Start-Sleep -Seconds 3
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Post-deployment Testing)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Testing the App if it is Running or NOT...
+[Pipeline] echo
+Execute the curl command to fetch the HTTP status code
+[Pipeline] bat
+[Pipeline] echo
+HTTP Response Code: 200
+[Pipeline] echo
+App is Up and Running Successfully...
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Cleaning up any running servers...
+[Pipeline] bat
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>for /F "tokens=5" %a in ('netstat -ano | find ":3000"') do (if %a NEQ 0 (
+taskkill /pid %a /f  
+ exit /B 0 
+) ) 
+
+D:\jenkins_New_Home\workspace\Build_and_Deploy_React_CI_CD_PipeLine_Project>(if 13544 NEQ 0 (
+taskkill /pid 13544 /f  
+ exit /B 0 
+) ) 
+SUCCESS: The process with PID 13544 has been terminated.
+[Pipeline] echo
+Pipeline executed successfully!
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
